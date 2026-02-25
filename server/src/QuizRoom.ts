@@ -145,8 +145,12 @@ export class QuizRoom {
         return;
       }
         
-      this.answers.set(playerId, choiceIndex);
-      
+      this.answers.set(playerId, choiceIndex)
+
+      if (this.hostWs) {
+        send(this.hostWs, { type: 'answer_progress', count: this.answers.size })
+      }
+
       if (this.answers.get(playerId) === this.questions[this.currentQuestionIndex].correctIndex) {
         const score = 1000 + Math.round(500 * (this.remaining / this.questions[this.currentQuestionIndex].timerSec));
         this.scores.set(playerId, (this.scores.get(playerId) || 0) + score);

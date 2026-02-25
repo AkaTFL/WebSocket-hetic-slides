@@ -34,3 +34,4 @@ export type ServerMessage =
   | { type: 'ended' }
   | { type: 'error'; message: string }
   | { type: 'sync'; phase: QuizPhase; data: unknown }
+  | { type: 'answer_progress'; count: number }

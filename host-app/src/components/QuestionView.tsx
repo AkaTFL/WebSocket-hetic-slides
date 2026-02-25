@@ -37,11 +37,36 @@ interface QuestionViewProps {
 function QuestionView({ question, index, total, remaining, answerCount, totalPlayers }: QuestionViewProps) {
   return (
     <div className="phase-container">
-      {/* TODO: En-tete "Question {index + 1} / {total}" */}
-      {/* TODO: Timer avec .countdown-circle (+ .warning / .danger selon remaining) */}
-      {/* TODO: Texte de la question avec .question-text */}
-      {/* TODO: Grille des 4 choix avec .choices-grid et .choice-card */}
-      {/* TODO: Compteur "{answerCount} / {totalPlayers} reponses" */}
+      <div className="question-header">
+        <span>
+          Question {index + 1} / {total}
+        </span>
+        <span>
+          {answerCount} / {totalPlayers} reponses
+        </span>
+      </div>
+
+      <div className="countdown">
+        <div
+          className={`countdown-circle ${remaining <= 3 ? 'danger' : remaining <= 10 ? 'warning' : ''}`}
+        >
+          {remaining}
+        </div>
+      </div>
+
+      <h1 className="question-text">{question.text}</h1>
+
+      <div className="choices-grid">
+        {question.choices.map((choice, choiceIndex) => (
+          <div key={`${choice}-${choiceIndex}`} className="choice-card">
+            {choice}
+          </div>
+        ))}
+      </div>
+
+      <p className="answer-counter">
+        {answerCount} / {totalPlayers} reponses
+      </p>
     </div>
   )
 }
