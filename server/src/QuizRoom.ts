@@ -118,6 +118,7 @@ export class QuizRoom {
     
     if (this.currentQuestionIndex >= this.questions.length) {
       this.broadcastLeaderboard();
+      setTimeout(() => this.end(), 10000); // Attendre 10 secondes avant de terminer le quiz
       return;
     }
     
@@ -180,6 +181,7 @@ export class QuizRoom {
     clearInterval(this.timerId!);
     this.phase = 'results';
     this.broadcastResults();
+    setTimeout(() => this.nextQuestion(), 5000); // Attendre 5 secondes avant la question suivante
   }
 
   /**
