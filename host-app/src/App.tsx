@@ -87,6 +87,11 @@ function App() {
         break
       }
 
+      case 'answer_progress': {
+        setAnswerCount(lastMessage.count)
+        break
+      }
+
       case 'error': {
         console.error('[Host] Erreur serveur:', lastMessage.message)
         break

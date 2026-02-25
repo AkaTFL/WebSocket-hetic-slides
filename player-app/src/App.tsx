@@ -38,7 +38,9 @@ function App() {
     switch (lastMessage.type) {
       case 'joined': {
         setPlayers(lastMessage.players)
-        setPlayerId(lastMessage.playerId)
+        if (!playerId) {
+          setPlayerId(lastMessage.playerId)
+        }
         setPhase('lobby')
         setError(undefined)
         break
@@ -61,7 +63,7 @@ function App() {
       case 'results': {
         const correct = myAnswerIndexRef.current === lastMessage.correctIndex
         setLastCorrect(correct)
-        const myScore = lastMessage.scores[playerId] ?? 0
+        const myScore = lastMessage.scores[playerName] ?? 0
         setScore(myScore)
         setPhase('feedback')
         break
