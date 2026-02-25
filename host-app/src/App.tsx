@@ -34,8 +34,13 @@ function App() {
   useEffect(() => {
     if (!lastMessage) return
 
-    // TODO: Traiter chaque type de message du serveur
-    // Utiliser un switch sur lastMessage.type
+    const liveCountMessage = lastMessage as { type?: string; count?: number }
+
+    if (liveCountMessage.type === 'answer:count' && typeof liveCountMessage.count === 'number') {
+      setAnswerCount(liveCountMessage.count)
+      return
+    }
+
 
     switch (lastMessage.type) {
       case 'sync': {
